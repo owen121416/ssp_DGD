@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPN - SSP Login</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.ipn.mx/assets/files/main/img/template/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="login.html">Iniciar Sesión</a>
+    <a href="registro.html">Registro</a>
+    <a href="dashboard.html">Panel</a>
+    <a href="programas.html">Programas</a>
+    <a href="postulacion.html">Postulación</a>
+    <a href="subir-evidencias.html">Evidencias</a>
+    <a href="seguimiento.html">Seguimiento</a>
+    <a href="evaluacion.html">Evaluación</a>
+    <a href="gestion-documental.html">Documentos</a>
+    <a href="panel-asesor.html">Asesor</a>
+    <a href="panel-admin.html">Admin</a>
+    <a href="criticas.html">Críticas</a>
+    <a href="#" id="cerrarSesion">Cerrar Sesión</a>
+  </nav>
+
+  <header>
+    <h1>Iniciar sesión</h1>
+  </header>
+  <section class="container container-sm">
+    <form id="loginForm">
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" required>
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" required>
+      <button type="submit">Entrar</button>
+      <p id="mensajeLogin" style="color: red; text-align: center; margin-top: 10px;"></p>
+    </form>
+    <div class="link">
+      <a href="registro.html">¿No tienes cuenta? Regístrate</a>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const mensajeLogin = document.getElementById('mensajeLogin');
+
+      const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+      const usuarioEncontrado = usuarios.find(user => user.email === email && user.password === password);
+
+      if (usuarioEncontrado) {
+        localStorage.setItem('usuarioActivo', JSON.stringify(usuarioEncontrado));
+        mensajeLogin.textContent = 'Inicio de sesión exitoso. Redirigiendo...';
+        mensajeLogin.style.color = 'green';
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 1000);
+      } else {
+        mensajeLogin.textContent = 'Correo o contraseña incorrectos.';
+        mensajeLogin.style.color = 'red';
+      }
+    });
+
+    // Funcionalidad de cerrar sesión (para que el botón esté presente si un usuario intenta volver aquí)
+    document.getElementById('cerrarSesion').addEventListener('click', function(event) {
+      event.preventDefault();
+      localStorage.removeItem('usuarioActivo');
+      localStorage.removeItem('horasServicioSocial');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

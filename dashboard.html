@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPN - SSP Panel</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.ipn.mx/assets/files/main/img/template/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="login.html">Iniciar Sesión</a>
+    <a href="registro.html">Registro</a>
+    <a href="dashboard.html">Panel</a>
+    <a href="programas.html">Programas</a>
+    <a href="postulacion.html">Postulación</a>
+    <a href="subir-evidencias.html">Evidencias</a>
+    <a href="seguimiento.html">Seguimiento</a>
+    <a href="evaluacion.html">Evaluación</a>
+    <a href="gestion-documental.html">Documentos</a>
+    <a href="panel-asesor.html">Asesor</a>
+    <a href="panel-admin.html">Admin</a>
+    <a href="criticas.html">Críticas</a>
+    <a href="#" id="cerrarSesion">Cerrar Sesión</a>
+  </nav>
+
+  <header>
+    <h1 id="tituloPanel">Panel del Alumno</h1>
+  </header>
+  <section class="container">
+    <h2 id="bienvenidaUsuario"></h2>
+    <p>Aquí puedes gestionar tus actividades y el progreso de tu servicio social.</p>
+
+    <div class="card">
+      <h3>Mi Progreso</h3>
+      <p>Horas completadas: <span id="horasCompletadas">0</span> de 480</p>
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="progresoSS" style="width: 0%;">0%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Acciones Rápidas</h3>
+      <div class="link">
+        <a href="programas.html">Explorar Programas</a> | 
+        <a href="postulacion.html">Realizar Postulación</a> |
+        <a href="subir-evidencias.html">Subir Evidencias</a> | 
+        <a href="seguimiento.html">Ver Seguimiento</a> |
+        <a href="gestion-documental.html">Descargar Documentos</a>
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    // Proteger ruta y cargar datos del usuario
+    const usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+    if (!usuarioActivo) {
+      window.location.href = 'login.html';
+    } else {
+      document.getElementById('bienvenidaUsuario').textContent = `¡Hola, ${usuarioActivo.nombre}!`;
+      document.getElementById('tituloPanel').textContent = `Panel de ${usuarioActivo.nombre}`;
+
+      // Simulación de horas completadas para la barra de progreso
+      let horas = localStorage.getItem('horasServicioSocial') || 0;
+      horas = parseInt(horas); // Asegurarse de que sea un número
+      document.getElementById('horasCompletadas').textContent = horas;
+      
+      const totalHoras = 480;
+      const porcentaje = (horas / totalHoras) * 100;
+      const progressBarFill = document.getElementById('progresoSS');
+      progressBarFill.style.width = `${porcentaje.toFixed(0)}%`;
+      progressBarFill.textContent = `${porcentaje.toFixed(0)}%`;
+      if (porcentaje < 25) {
+        progressBarFill.style.backgroundColor = 'red';
+      } else if (porcentaje < 75) {
+        progressBarFill.style.backgroundColor = 'orange';
+      } else {
+        progressBarFill.style.backgroundColor = 'var(--guinda)';
+      }
+    }
+
+    // Funcionalidad de cerrar sesión
+    document.getElementById('cerrarSesion').addEventListener('click', function(event) {
+      event.preventDefault();
+      localStorage.removeItem('usuarioActivo');
+      localStorage.removeItem('horasServicioSocial'); // Limpiar horas al cerrar sesión
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

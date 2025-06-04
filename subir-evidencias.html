@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPN - SSP Subir Evidencias</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.ipn.mx/assets/files/main/img/template/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="login.html">Iniciar Sesión</a>
+    <a href="registro.html">Registro</a>
+    <a href="dashboard.html">Panel</a>
+    <a href="programas.html">Programas</a>
+    <a href="postulacion.html">Postulación</a>
+    <a href="subir-evidencias.html">Evidencias</a>
+    <a href="seguimiento.html">Seguimiento</a>
+    <a href="evaluacion.html">Evaluación</a>
+    <a href="gestion-documental.html">Documentos</a>
+    <a href="panel-asesor.html">Asesor</a>
+    <a href="panel-admin.html">Admin</a> <a href="criticas.html">Críticas</a>
+    <a href="#" id="cerrarSesion">Cerrar Sesión</a>
+  </nav>
+
+  <header>
+    <h1>Subir Evidencias</h1>
+  </header>
+
+  <section class="container container-sm">
+    <h2>Carga tus Documentos</h2>
+    <form id="evidenciaForm">
+      <div class="form-group">
+        <label for="fechaActividad">Fecha de la Actividad:</label>
+        <input type="date" id="fechaActividad" required>
+      </div>
+
+      <div class="form-group">
+        <label for="horasActividad">Horas dedicadas:</label>
+        <input type="number" id="horasActividad" min="1" max="10" required placeholder="Horas (ej: 4)">
+      </div>
+
+      <div class="form-group">
+        <label for="evidencia">Selecciona archivo (PDF, JPG, PNG):</label>
+        <input type="file" id="evidencia" name="evidencia" accept=".pdf, .jpg, .jpeg, .png" required>
+      </div>
+
+      <div class="form-group">
+        <label for="comentario">Descripción de la Actividad:</label>
+        <textarea id="comentario" name="comentario" rows="4" placeholder="Describe detalladamente la actividad realizada y su relevancia para tu servicio social..."></textarea>
+      </div>
+
+      <button type="submit">Subir Evidencia</button>
+      <p id="mensajeEvidencia" style="text-align: center; margin-top: 10px;"></p>
+    </form>
+  </section>
+
+  <script>
+    // Protección de ruta
+    const usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+    if (!usuarioActivo) {
+      window.location.href = 'login.html';
+    }
+
+    document.getElementById('evidenciaForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const mensaje = document.getElementById('mensajeEvidencia');
+      
+      const horasInput = document.getElementById('horasActividad');
+      let horasSumar = parseInt(horasInput.value);
+
+      let horasActuales = parseInt(localStorage.getItem('horasServicioSocial')) || 0;
+      horasActuales += horasSumar;
+      localStorage.setItem('horasServicioSocial', horasActuales);
+
+      mensaje.textContent = 'Evidencia subida con éxito y horas registradas. En un sistema real, esto se guardaría en la base de datos.';
+      mensaje.style.color = 'green';
+      // Limpiar formulario o redirigir después de subir
+      setTimeout(() => {
+        window.location.href = 'seguimiento.html'; // Redirige al seguimiento
+      }, 2000);
+    });
+
+    // Funcionalidad de cerrar sesión
+    document.getElementById('cerrarSesion').addEventListener('click', function(event) {
+      event.preventDefault();
+      localStorage.removeItem('usuarioActivo');
+      localStorage.removeItem('horasServicioSocial');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,504 @@
+/* Variables CSS para colores */
+:root {
+  --guinda: #8D252E;
+  --dorado: #FFD700; /* Un dorado que combine con el guinda */
+  --gris-claro: #f4f4f4;
+  --gris-oscuro: #333;
+  --blanco: #fff;
+}
+
+/* Estilos Generales y Reset Básico */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--gris-claro);
+  color: var(--gris-oscuro);
+  line-height: 1.6;
+  overflow-x: hidden; /* Evita el scroll horizontal */
+  box-sizing: border-box; /* Asegura que padding y border se incluyan en el ancho/alto */
+}
+
+/* Reseteo para imágenes */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px; /* Ancho máximo para pantallas grandes */
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--blanco);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.container-sm {
+  max-width: 600px; /* Contenedor más pequeño para formularios */
+}
+
+h1, h2, h3 {
+  color: var(--guinda);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Navegación */
+nav {
+  background-color: var(--guinda);
+  padding: 15px 0;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+  justify-content: center;
+  gap: 15px; /* Espacio entre los enlaces de navegación */
+}
+
+nav a {
+  color: var(--blanco);
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+  white-space: nowrap; /* Evita que el texto de los enlaces se rompa */
+}
+
+nav a:hover {
+  background-color: #a72d30; /* Tono más oscuro al pasar el ratón */
+}
+
+/* Header */
+header {
+  background-color: var(--guinda);
+  color: var(--blanco);
+  padding: 40px 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  color: var(--blanco);
+  margin: 0;
+  font-size: 2.5rem; /* Tamaño de fuente responsivo */
+}
+
+/* Formularios y elementos de interacción */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: calc(100% - 22px); /* Ajuste para padding y borde */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Incluye padding y border en el ancho */
+}
+
+button[type="submit"],
+button {
+  background-color: var(--guinda);
+  color: var(--blanco);
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  align-self: center; /* Centra los botones */
+  width: auto; /* Ancho automático para botones */
+  min-width: 150px;
+  box-sizing: border-box;
+}
+
+button[type="submit"]:hover,
+button:hover {
+  background-color: #a72d30;
+}
+
+.link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.link a {
+  color: var(--guinda);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.link a:hover {
+  text-decoration: underline;
+}
+
+/* Tarjetas (Cards) */
+.card {
+  background-color: #fcfcfc;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+.card h3 {
+  color: var(--guinda);
+  margin-top: 0;
+  font-size: 1.6rem;
+}
+
+/* Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  white-space: normal; /* Asegura que el texto no se desborde si es muy largo */
+  /* overflow-x: auto;  Removido de aquí, se aplica en media query si es necesario */
+  display: table; /* Por defecto se comporta como tabla */
+}
+
+table thead, table tbody {
+  display: table-row-group; /* Vuelve al comportamiento normal de tabla */
+  width: 100%;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+  box-sizing: border-box;
+  display: table-cell; /* Vuelve al comportamiento normal de tabla */
+}
+
+table th {
+  background-color: var(--guinda);
+  color: var(--blanco);
+  font-weight: 600;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+/* Fin de estilos de tabla para desktop */
+
+
+/* Barra de progreso (Dashboard) */
+.progress-bar {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  margin-top: 10px;
+  height: 25px;
+  overflow: hidden; /* Asegura que el relleno no se salga */
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--guinda);
+  color: var(--blanco);
+  text-align: center;
+  line-height: 25px;
+  border-radius: 5px;
+  transition: width 0.5s ease-in-out, background-color 0.3s ease;
+}
+
+/* Columnas para el panel de admin/asesor */
+.form-columns {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+  gap: 20px; /* Espacio entre las columnas */
+  justify-content: center;
+}
+
+.form-columns .card,
+.form-columns button {
+  flex: 1; /* Permite que los elementos se expandan */
+  min-width: 280px; /* Ancho mínimo antes de envolver */
+  max-width: 48%; /* Máximo dos columnas por fila en pantallas grandes */
+  box-sizing: border-box;
+}
+
+/* MEDIA QUERIES para responsividad */
+
+/* Teléfonos pequeños y medianos (hasta 767px) */
+@media (max-width: 767px) {
+  body {
+    font-size: 0.9rem; /* Reduce el tamaño de fuente base */
+  }
+
+  /* Ajustes de navegación para móvil */
+  nav {
+    flex-direction: column; /* Apila los enlaces de navegación */
+    gap: 0; /* Elimina el espacio entre enlaces apilados */
+    padding: 5px 0; /* Menos padding */
+  }
+
+  nav a {
+    width: 100%; /* Ancho completo para cada enlace */
+    padding: 12px 0; /* Más padding vertical para facilitar el toque */
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador suave */
+  }
+
+  nav a:last-child {
+    border-bottom: none; /* Sin borde en el último enlace */
+  }
+
+  header {
+    padding: 30px 15px; /* Menos padding en el header */
+    margin-bottom: 15px;
+  }
+
+  header h1 {
+    font-size: 1.8rem; /* Tamaño de fuente más pequeño para encabezados */
+  }
+
+  .container {
+    margin: 15px auto;
+    padding: 15px;
+    width: 95%; /* Mayor ancho en pantallas pequeñas */
+  }
+
+  h1, h2, h3 {
+    font-size: 1.4rem; /* Reduce el tamaño de los títulos */
+    margin-bottom: 15px;
+  }
+
+  /* Ajustes para formularios */
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 0.9rem;
+    padding: 10px;
+    width: calc(100% - 20px); /* Ajuste para mantener el padding */
+  }
+
+  button[type="submit"],
+  button {
+    font-size: 1rem;
+    padding: 12px 15px;
+    width: 95%; /* Ancho casi completo para botones */
+    margin: 0 auto; /* Centrar el botón */
+  }
+
+  /* Ajustes para tablas en móvil (Transformación "card-like") */
+  table {
+    overflow-x: auto; /* Permite scroll horizontal en caso de que la tabla sea demasiado ancha */
+    display: block; /* Necesario para overflow-x */
+    width: 100%;
+  }
+
+  table thead {
+    display: none; /* Oculta el encabezado original en móvil */
+  }
+
+  table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  table tr {
+    border: 1px solid #ccc;
+    margin-bottom: 15px; /* Más espacio entre filas/tarjetas */
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: block; /* Cada fila se convierte en un bloque */
+    padding: 10px; /* Padding dentro de cada "tarjeta" de fila */
+  }
+
+  table td {
+    border: none; /* Elimina los bordes de celda */
+    border-bottom: 1px solid #eee; /* Añade un separador sutil */
+    position: relative;
+    padding-left: 50%; /* Espacio para la etiqueta del pseudo-elemento */
+    text-align: right;
+    display: block; /* Cada celda es un bloque dentro de la fila */
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  table td:last-child {
+    border-bottom: none; /* No hay borde en la última celda */
+  }
+
+  table td:before {
+    position: absolute;
+    top: 50%;
+    left: 10px; /* Alinea la etiqueta a la izquierda */
+    width: 40%;
+    padding-right: 10px;
+    white-space: nowrap; /* Evita que la etiqueta se rompa */
+    text-align: left;
+    font-weight: bold;
+    content: attr(data-label); /* Usa el atributo data-label */
+    transform: translateY(-50%); /* Centra verticalmente la etiqueta */
+    box-sizing: border-box;
+  }
+
+  /* Ajustes específicos para las columnas en el panel de admin/asesor */
+  .form-columns {
+    flex-direction: column; /* Apila las tarjetas/botones en móvil */
+    gap: 15px;
+  }
+  .form-columns .card,
+  .form-columns button {
+    min-width: unset; /* Elimina el min-width */
+    max-width: 100%; /* Ocupa todo el ancho disponible */
+    width: 100%;
+  }
+
+  /* Estilos específicos para essss.html (invitación) */
+  .tarjeta {
+      padding: 20px; /* Menos padding en móvil */
+      width: 95%; /* Ocupa más ancho */
+      margin-bottom: 25px;
+  }
+
+  .tarjeta:first-child {
+      padding-top: 100px; /* Ajuste para la decoración superior en móvil */
+  }
+
+  .decoracion-arriba {
+      height: 80px; /* Menor altura de la decoración */
+      background-size: 100% auto; /* Ajusta la imagen */
+  }
+
+  .decorativo {
+      width: 70px; /* Más pequeño */
+      top: 10px;
+      left: 10px;
+  }
+
+  .titulo-quince {
+      font-size: 36px; /* Más pequeño */
+  }
+
+  .quince {
+      font-size: 28px; /* Más pequeño */
+      margin: 5px 0 10px 0;
+  }
+
+  .texto {
+      font-size: 14px; /* Más pequeño */
+      margin: 15px 0;
+  }
+
+  .fecha {
+      font-size: 16px; /* Más pequeño */
+      margin: 15px 0;
+      padding: 8px 0;
+  }
+
+  .datos {
+      font-size: 13px; /* Más pequeño */
+  }
+
+  .icono {
+      font-size: 24px; /* Más pequeño */
+      margin-bottom: 5px;
+  }
+
+  .subseccion {
+      padding-left: 12px; /* Menos padding */
+      margin: 15px 0;
+  }
+
+  .confirmar-asistencia {
+      padding: 10px 20px; /* Menos padding */
+      font-size: 15px; /* Más pequeño */
+      margin-top: 20px;
+  }
+}
+
+/* Tabletas (768px a 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  nav {
+    gap: 10px;
+    padding: 15px 10px;
+  }
+
+  nav a {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .form-columns .card,
+  .form-columns button {
+    min-width: 300px; /* Ajuste para tablets */
+    max-width: 45%;
+  }
+
+  /* Asegura que las tablas tengan un ancho razonable */
+  table {
+      width: 100%;
+      display: table; /* Vuelve al comportamiento normal de tabla */
+  }
+
+  table thead {
+      display: table-header-group;
+  }
+  table tbody {
+      display: table-row-group;
+  }
+  table tr {
+      display: table-row;
+      border: none;
+      box-shadow: none;
+      margin-bottom: 0;
+  }
+  table td {
+      display: table-cell;
+      padding-left: 12px; /* Restaura el padding normal */
+      text-align: left; /* Restaura la alineación */
+      border-bottom: 1px solid #ddd; /* Vuelve a los bordes de celda */
+  }
+  table td:before {
+      display: none; /* Oculta las etiquetas data-label en tablet y desktop */
+  }
+}
+
+/* Monitores grandes (más de 1201px) */
+@media (min-width: 1201px) {
+  .container {
+    padding: 30px; /* Mayor padding en pantallas grandes */
+  }
+
+  header h1 {
+    font-size: 3rem;
+  }
+}

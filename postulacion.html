@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPN - SSP Postulación</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.ipn.mx/assets/files/main/img/template/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="login.html">Iniciar Sesión</a>
+    <a href="registro.html">Registro</a>
+    <a href="dashboard.html">Panel</a>
+    <a href="programas.html">Programas</a>
+    <a href="postulacion.html">Postulación</a>
+    <a href="subir-evidencias.html">Evidencias</a>
+    <a href="seguimiento.html">Seguimiento</a>
+    <a href="evaluacion.html">Evaluación</a>
+    <a href="gestion-documental.html">Documentos</a>
+    <a href="panel-asesor.html">Asesor</a>
+    <a href="panel-admin.html">Admin</a>
+    <a href="criticas.html">Críticas</a>
+    <a href="#" id="cerrarSesion">Cerrar Sesión</a>
+  </nav>
+
+  <header>
+    <h1>Postulación de Servicio Social</h1>
+  </header>
+
+  <section class="container">
+    <h2>Postúlate a un Programa</h2>
+    <form id="postulacionForm">
+      <div class="form-group">
+        <label for="programaSeleccionado">Programa al que deseas postularte:</label>
+        <select id="programaSeleccionado" required>
+          <option value="">Selecciona un programa</option>
+          <option value="desarrollo-software">Programa de Apoyo en Desarrollo de Software</option>
+          <option value="salud-comunitaria">Apoyo en Salud Comunitaria</option>
+          <option value="investigacion-biologica">Investigación Biológica</option>
+        </select>
+      </div>
+
+      <h3>Precarga de Documentos (Simulada)</h3>
+      <div class="form-group">
+        <label for="curriculum">Currículum Vitae (PDF):</label>
+        <input type="file" id="curriculum" accept=".pdf">
+      </div>
+      <div class="form-group">
+        <label for="kardex">Kardex Académico (PDF):</label>
+        <input type="file" id="kardex" accept=".pdf">
+      </div>
+      <div class="form-group">
+        <label for="cartaMotivos">Carta de Motivos (PDF):</label>
+        <input type="file" id="cartaMotivos" accept=".pdf">
+      </div>
+
+      <div class="form-group">
+        <label for="promedio">Promedio actual (para validación de requisitos):</label>
+        <input type="number" id="promedio" step="0.01" min="0" max="10" placeholder="Ej: 8.5">
+      </div>
+
+      <button type="submit">Enviar Postulación</button>
+      <p id="mensajePostulacion" style="text-align: center; margin-top: 10px;"></p>
+    </form>
+
+    <h3 style="margin-top: 2rem; color: var(--guinda);">Historial de Postulaciones (Simulado)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Programa</th>
+          <th>Fecha Postulación</th>
+          <th>Estatus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Programa">Programa de Apoyo en Desarrollo de Software</td>
+          <td data-label="Fecha Postulación">2024-03-10</td>
+          <td data-label="Estatus" style="color: orange;">Pendiente</td>
+        </tr>
+        <tr>
+          <td data-label="Programa">Apoyo en Salud Comunitaria</td>
+          <td data-label="Fecha Postulación">2024-02-15</td>
+          <td data-label="Estatus" style="color: green;">Aceptado</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <script>
+    // Protección de ruta
+    const usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+    if (!usuarioActivo) {
+      window.location.href = 'login.html';
+    }
+
+    document.getElementById('postulacionForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const mensaje = document.getElementById('mensajePostulacion');
+      mensaje.textContent = 'Postulación enviada con éxito. En un sistema real, los documentos se cargarían y la compatibilidad se validaría con el backend.';
+      mensaje.style.color = 'green';
+    });
+
+    // Funcionalidad de cerrar sesión
+    document.getElementById('cerrarSesion').addEventListener('click', function(event) {
+      event.preventDefault();
+      localStorage.removeItem('usuarioActivo');
+      localStorage.removeItem('horasServicioSocial');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

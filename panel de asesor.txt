@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPN - SSP Panel Asesor</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.ipn.mx/assets/files/main/img/template/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="login.html">Iniciar Sesión</a>
+    <a href="registro.html">Registro</a>
+    <a href="dashboard.html">Panel</a>
+    <a href="programas.html">Programas</a>
+    <a href="postulacion.html">Postulación</a>
+    <a href="subir-evidencias.html">Evidencias</a>
+    <a href="seguimiento.html">Seguimiento</a>
+    <a href="evaluacion.html">Evaluación</a>
+    <a href="gestion-documental.html">Documentos</a>
+    <a href="panel-asesor.html">Asesor</a>
+    <a href="panel-admin.html">Admin</a>
+    <a href="criticas.html">Críticas</a>
+    <a href="#" id="cerrarSesion">Cerrar Sesión</a>
+  </nav>
+
+  <header>
+    <h1>Panel del Asesor Académico</h1>
+  </header>
+
+  <section class="container">
+    <h2>Mis Alumnos Asignados (Simulado)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre del Alumno</th>
+          <th>Boleta</th>
+          <th>Programa</th>
+          <th>Horas Cumplidas</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Juan Pérez</td>
+          <td>2020600001</td>
+          <td>Desarrollo de Software</td>
+          <td>120/480</td>
+          <td><a href="#" onclick="alert('Accediendo a bitácora de Juan Pérez...'); return false;">Ver Bitácora</a> | <a href="#" onclick="alert('Evaluando a Juan Pérez...'); return false;">Evaluar</a></td>
+        </tr>
+        <tr>
+          <td>María García</td>
+          <td>2021600002</td>
+          <td>Salud Comunitaria</td>
+          <td>300/480</td>
+          <td><a href="#" onclick="alert('Accediendo a bitácora de María García...'); return false;">Ver Bitácora</a> | <a href="#" onclick="alert('Evaluando a María García...'); return false;">Evaluar</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card" style="margin-top: 2rem;">
+      <h3>Validación de Actividades y Horas (Simulado)</h3>
+      <form>
+        <label for="alumnoValidar">Selecciona Alumno:</label>
+        <select id="alumnoValidar">
+          <option value="">-- Selecciona --</option>
+          <option value="juan-perez">Juan Pérez</option>
+          <option value="maria-garcia">María García</option>
+        </select>
+        <label for="actividadValidar">Actividad a Validar:</label>
+        <input type="text" id="actividadValidar" placeholder="Ej: Investigación de librerías">
+        <label for="horasAprobar">Horas a Aprobar:</label>
+        <input type="number" id="horasAprobar" min="1" placeholder="Ej: 4">
+        <button type="button" onclick="alert('Actividad validada y horas aprobadas. Esto se registraría en la base de datos.');">Validar Actividad</button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    // Protección de ruta (simulada para asesor)
+    const usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+    // En un sistema real, verificarías el rol del usuario (por ejemplo, usuarioActivo.rol === 'asesor')
+    if (!usuarioActivo) {
+      window.location.href = 'login.html';
+    }
+
+    // Funcionalidad de cerrar sesión
+    document.getElementById('cerrarSesion').addEventListener('click', function(event) {
+      event.preventDefault();
+      localStorage.removeItem('usuarioActivo');
+      localStorage.removeItem('horasServicioSocial');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

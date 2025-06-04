@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPN - SSP Programas</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.ipn.mx/assets/files/main/img/template/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="login.html">Iniciar Sesión</a>
+    <a href="registro.html">Registro</a>
+    <a href="dashboard.html">Panel</a>
+    <a href="programas.html">Programas</a>
+    <a href="postulacion.html">Postulación</a>
+    <a href="subir-evidencias.html">Evidencias</a>
+    <a href="seguimiento.html">Seguimiento</a>
+    <a href="evaluacion.html">Evaluación</a>
+    <a href="gestion-documental.html">Documentos</a>
+    <a href="panel-asesor.html">Asesor</a>
+    <a href="panel-admin.html">Admin</a>
+    <a href="criticas.html">Críticas</a>
+    <a href="#" id="cerrarSesion">Cerrar Sesión</a>
+  </nav>
+
+  <header>
+    <h1>Explorador de Programas</h1>
+  </header>
+
+  <section class="container">
+    <h2>Encuentra tu Servicio Social Ideal</h2>
+    <form>
+      <div class="form-columns">
+        <div class="form-group">
+          <label for="carrera">Carrera:</label>
+          <input type="text" id="carrera" placeholder="Ej: Ingeniería en Sistemas Computacionales">
+        </div>
+        <div class="form-group">
+          <label for="plantel">Plantel:</label>
+          <input type="text" id="plantel" placeholder="Ej: UPIITA, ESCOM">
+        </div>
+        <div class="form-group">
+          <label for="institucion">Institución Externa:</label>
+          <input type="text" id="institucion" placeholder="Ej: CONACYT, Hospital La Raza">
+        </div>
+        <div class="form-group">
+          <label for="zona">Zona Geográfica:</label>
+          <input type="text" id="zona" placeholder="Ej: Gustavo A. Madero, CDMX">
+        </div>
+        <div class="form-group">
+          <label for="modalidad">Modalidad:</label>
+          <select id="modalidad">
+            <option value="">Todas</option>
+            <option value="presencial">Presencial</option>
+            <option value="virtual">Virtual</option>
+            <option value="mixta">Mixta</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="disponibilidad">Disponibilidad:</label>
+          <input type="number" id="disponibilidad" min="1" placeholder="Ej: 5 (cupos)">
+        </div>
+      </div>
+      <button type="submit">Buscar Programas</button>
+    </form>
+
+    <h3 style="margin-top: 2rem; color: var(--guinda);">Resultados de la Búsqueda (Simulado)</h3>
+    <div id="resultadosProgramas">
+      <div class="card">
+        <h3>Programa de Apoyo en Desarrollo de Software</h3>
+        <p><strong>Institución:</strong> Centro de Cómputo del IPN</p>
+        <p><strong>Plantel:</strong> ESCOM</p>
+        <p><strong>Carrera Requerida:</strong> Ingeniería en Sistemas Computacionales, Lic. en Ciencias de la Computación</p>
+        <p><strong>Modalidad:</strong> Virtual</p>
+        <p><strong>Horas Totales:</strong> 480</p>
+        <p><strong>Disponibilidad:</strong> 3 cupos</p>
+        <p><strong>Opiniones:</strong> ★★★★☆ (4.5/5) - "Excelente experiencia, mucho aprendizaje."</p>
+        <div style="text-align: right; margin-top: 1rem;">
+            <a href="postulacion.html" style="background-color: var(--guinda); color: var(--blanco); padding: 8px 15px; border-radius: 5px; text-decoration: none;">Postularse</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Apoyo en Salud Comunitaria</h3>
+        <p><strong>Institución:</strong> Hospital General La Villa</p>
+        <p><strong>Plantel:</strong> ENCB</p>
+        <p><strong>Carrera Requerida:</strong> Médico Cirujano y Partero, Enfermería</p>
+        <p><strong>Modalidad:</strong> Presencial</p>
+        <p><strong>Horas Totales:</strong> 480</p>
+        <p><strong>Disponibilidad:</strong> 2 cupos</p>
+        <p><strong>Opiniones:</strong> ★★★☆☆ (3.8/5) - "Buen ambiente, pero la carga de trabajo es alta."</p>
+        <div style="text-align: right; margin-top: 1rem;">
+            <a href="postulacion.html" style="background-color: var(--guinda); color: var(--blanco); padding: 8px 15px; border-radius: 5px; text-decoration: none;">Postularse</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Protección de ruta
+    const usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+    if (!usuarioActivo) {
+      window.location.href = 'login.html';
+    }
+
+    // Funcionalidad de cerrar sesión
+    document.getElementById('cerrarSesion').addEventListener('click', function(event) {
+      event.preventDefault();
+      localStorage.removeItem('usuarioActivo');
+      localStorage.removeItem('horasServicioSocial');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

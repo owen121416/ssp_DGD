@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Invitación XV Años - Estrella</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 30px; /* Aumenté el padding del body */
+            font-family: 'Montserrat', sans-serif; /* Fuente más moderna y legible para el cuerpo */
+            background-color: #f9f9f9; /* Gris claro de fondo */
+            color: #333; /* Gris oscuro para el texto principal */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .tarjeta {
+            background-color: #fff;
+            border: 1px solid #ddd; /* Borde gris muy claro */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra más suave y moderna */
+            margin-bottom: 40px; /* Más espacio entre tarjetas */
+            padding: 40px; /* Aumenté el padding interno */
+            width: 90%;
+            max-width: 550px; /* Ligero aumento del ancho máximo */
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px; /* Bordes más redondeados */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .tarjeta:first-child {
+            padding-top: 160px; /* Ajuste para la decoración superior */
+        }
+
+        .decoracion-arriba {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150px; /* Aumenté un poco la altura */
+            background-image: url('https://i.ibb.co/twcxLrTt/letras.png'); /* Asegúrate de que esta URL sea accesible */
+            background-repeat: no-repeat;
+            background-position: center top; /* Centrado horizontalmente */
+            background-size: contain;
+            z-index: 5;
+            opacity: 0.8; /* Ligero ajuste de la opacidad */
+            border-radius: 12px 12px 0 0;
+        }
+
+        .decorativo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100px; /* Reduje un poco el tamaño */
+            z-index: 10;
+            opacity: 0.7;
+        }
+
+        .titulo-quince {
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 52px; /* Un poco más grande */
+            margin-top: 10px; /* Reduje el margen superior */
+            color: #c93a3d; /* Rojo más elegante */
+        }
+
+        .quince {
+            font-size: 38px; /* Un poco más grande */
+            margin: 8px 0 20px 0; /* Ajusté los márgenes */
+            text-align: center;
+            color: #c93a3d;
+            font-weight: 500; /* Ligeramente más grueso */
+        }
+
+        .texto {
+            text-align: center;
+            margin: 25px 0; /* Aumenté el margen */
+            line-height: 1.8;
+            font-size: 17px; /* Ligeramente más grande */
+            color: #555; /* Gris más suave para el cuerpo del texto */
+        }
+
+        .fecha {
+            font-size: 22px; /* Ligeramente más grande */
+            font-weight: bold;
+            margin: 25px 0; /* Aumenté el margen */
+            text-align: center;
+            border-top: 1px solid #eee; /* Borde superior más claro */
+            border-bottom: 1px solid #eee; /* Borde inferior más claro */
+            padding: 15px 0; /* Aumenté el padding */
+            color: #777; /* Gris más claro para la fecha */
+        }
+
+        .datos {
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px; /* Aumenté el margen */
+            color: #555;
+        }
+
+        .icono {
+            font-size: 36px; /* Ligeramente más grande */
+            margin-bottom: 12px; /* Aumenté el margen inferior */
+            color: #c93a3d;
+            text-align: center;
+        }
+
+        .subseccion {
+            border-left: 3px solid #c93a3d; /* Rojo más elegante */
+            padding-left: 20px; /* Aumenté el padding izquierdo */
+            margin: 25px 0; /* Aumenté el margen */
+            text-align: left;
+            color: #555;
+        }
+
+        .nombre {
+            font-weight: 500; /* Ligeramente más grueso */
+            color: #333; /* Gris oscuro para los nombres */
+        }
+
+        .tarjeta:nth-child(2) .titulo-quince {
+            margin-top: 30px; /* Ajuste para la segunda tarjeta */
+        }
+
+        /* Estilos para el botón de confirmar asistencia */
+        .confirmar-asistencia {
+            background-color: #c93a3d; /* Rojo más elegante */
+            color: #fff;
+            border: none;
+            padding: 15px 30px; /* Aumenté el padding del botón */
+            border-radius: 10px; /* Bordes más redondeados */
+            font-family: 'Montserrat', sans-serif; /* Fuente más moderna para el botón */
+            font-size: 18px;
+            font-weight: 500; /* Botón más destacado */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 30px; /* Más espacio superior */
+            align-self: center; /* Centrar el botón */
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil al botón */
+        }
+
+        .confirmar-asistencia:hover {
+            background-color: #a72d30; /* Tono más oscuro al pasar el ratón */
+        }
+
+        /* MEDIA QUERIES para responsividad */
+
+        /* Teléfonos pequeños y medianos (hasta 767px) */
+        @media (max-width: 767px) {
+            body {
+                padding: 15px; /* Menos padding en móvil */
+            }
+            .tarjeta {
+                padding: 25px; /* Menos padding interno en móvil */
+                width: 95%; /* Ocupa más ancho */
+                margin-bottom: 30px;
+            }
+
+            .tarjeta:first-child {
+                padding-top: 130px; /* Ajuste para la decoración superior en móvil */
+            }
+
+            .decoracion-arriba {
+                height: 100px; /* Menor altura de la decoración */
+                background-size: 100% auto; /* Ajusta la imagen */
+            }
+
+            .decorativo {
+                width: 80px; /* Más pequeño */
+                top: 15px;
+                left: 15px;
+            }
+
+            .titulo-quince {
+                font-size: 40px; /* Más pequeño */
+            }
+
+            .quince {
+                font-size: 30px; /* Más pequeño */
+                margin: 5px 0 15px 0;
+            }
+
+            .texto {
+                font-size: 15px; /* Más pequeño */
+                margin: 15px 0;
+            }
+
+            .fecha {
+                font-size: 18px; /* Más pequeño */
+                margin: 20px 0;
+                padding: 10px 0;
+            }
+
+            .datos {
+                font-size: 14px; /* Más pequeño */
+            }
+
+            .icono {
+                font-size: 28px; /* Más pequeño */
+                margin-bottom: 8px;
+            }
+
+            .subseccion {
+                padding-left: 15px; /* Menos padding */
+                margin: 20px 0;
+            }
+
+            .confirmar-asistencia {
+                padding: 12px 25px; /* Menos padding */
+                font-size: 16px; /* Más pequeño */
+                margin-top: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tarjeta">
+        <div class="decoracion-arriba"></div>
+        <img src="https://i.ibb.co/L8G8K7K/XV.png" alt="Decorativo" class="decorativo"> 
+
+        <div class="texto">
+            Con el corazón lleno de ilusión, quiero compartir contigo un momento único en mi vida.<br>
+            Agradezco a Dios por permitirme llegar hasta aquí, rodeada de amor, enseñanzas y bendiciones.<br><br>
+            Hoy celebro no solo un paso más, sino la unión de todas las personas que han caminado a mi lado.
+        </div>
+
+        <div class="titulo-quince">Estrella</div>
+        <div class="quince">XV AÑOS</div>
+
+        <div class="texto" style="font-size: 18px;"> <span class="nombre" style="font-weight: 600; color: #333;">Estrella Fernanda Pichardo Rodríguez</span><br>
+            tiene el honor de invitarte a compartir un momento muy especial en su vida,<br>
+            acompañándola con tu presencia y cariño en este día inolvidable.
+        </div>
+
+        <div class="fecha">Viernes 27 de Junio de 2025</div>
+
+        <div class="datos">
+            Mis padres, <span class="nombre">Yeni Rodríguez Espinoza</span> y <span class="nombre">Miguel Ángel Rodríguez Hernández</span>,<br>
+            junto a mi madrina <span class="nombre">María de los Ángeles Rodríguez Espinoza</span>,<br>
+            me han guiado con amor, fe y esperanza.
+        </div>
+    </div>
+
+    <div class="tarjeta">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <div class="titulo-quince" style="font-size: 48px;">Detalles de la Celebración</div>
+            <div class="quince" style="font-size: 34px;">Acompáñanos</div>
+        </div>
+
+        <div class="subseccion">
+            <div class="icono">⛪</div>
+            <div style="font-weight: bold; margin-bottom: 8px; text-align: left; color: #333;">Ceremonia Religiosa</div>
+            <span style="font-weight: 500;">Parroquia de Nuestra Señora de Guadalupe</span><br>
+            ubicada en Ejido de Cuautitlán Mz. 22-Lt. 7,<br>
+            Lázaro Cárdenas, 54870 Cuautitlán, Méx.
+        </div>
+
+        <div class="subseccion">
+            <div class="icono">🎉</div>
+            <div style="font-weight: bold; margin-bottom: 8px; text-align: left; color: #333;">Recepción</div>
+            <span style="font-weight: 500;">7:00 PM - 7:30 PM en el salón Finca Maldonado</span><br>
+            Ubicada en Calle 29 Manzana 5 Lote 11,<br>
+            San Blas Uno, 54860 Cuautitlán, Méx.
+        </div>
+
+        <div style="text-align: center; margin-top: 35px; font-size: 18px; color: #555;">
+            ¡Tu presencia es el mejor regalo!
+        </div>
+
+        <a href="https://forms.gle/wuHa65kAivSqgnX36" class="confirmar-asistencia" target="_blank">Confirmar Asistencia</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPN - SSP Documentos</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.ipn.mx/assets/files/main/img/template/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="login.html">Iniciar Sesión</a>
+    <a href="registro.html">Registro</a>
+    <a href="dashboard.html">Panel</a>
+    <a href="programas.html">Programas</a>
+    <a href="postulacion.html">Postulación</a>
+    <a href="subir-evidencias.html">Evidencias</a>
+    <a href="seguimiento.html">Seguimiento</a>
+    <a href="evaluacion.html">Evaluación</a>
+    <a href="gestion-documental.html">Documentos</a>
+    <a href="panel-asesor.html">Asesor</a>
+    <a href="panel-admin.html">Admin</a>
+    <a href="criticas.html">Críticas</a>
+    <a href="#" id="cerrarSesion">Cerrar Sesión</a>
+  </nav>
+
+  <header>
+    <h1>Gestión Documental</h1>
+  </header>
+
+  <section class="container">
+    <h2>Documentos Oficiales</h2>
+    <p>Aquí puedes generar y descargar tus documentos de servicio social.</p>
+
+    <div class="card">
+      <h3>Generar Documentos</h3>
+      <div class="form-group">
+        <label for="tipoDocumento">Selecciona el tipo de documento a generar:</label>
+        <select id="tipoDocumento">
+          <option value="">-- Selecciona --</option>
+          <option value="presentacion">Carta de Presentación</option>
+          <option value="aceptacion">Carta de Aceptación</option>
+          <option value="reporte-final">Reporte Final</option>
+          <option value="liberacion">Carta de Liberación</option>
+        </select>
+      </div>
+      <button id="generarDocumentoBtn">Generar Documento</button>
+      <p id="mensajeGeneracion" style="text-align: center; margin-top: 10px;"></p>
+    </div>
+
+    <div class="card" style="margin-top: 2rem;">
+      <h3>Mis Documentos Generados (Simulado)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Documento</th>
+            <th>Fecha Generación</th>
+            <th>Estatus</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Documento">Carta de Presentación</td>
+            <td data-label="Fecha Generación">2024-01-20</td>
+            <td data-label="Estatus" style="color: green;">Validado</td>
+            <td data-label="Acción"><a href="#" onclick="alert('Descargando Carta de Presentación...'); return false;">Descargar</a></td>
+          </tr>
+          <tr>
+            <td data-label="Documento">Carta de Aceptación</td>
+            <td data-label="Fecha Generación">2024-02-05</td>
+            <td data-label="Estatus" style="color: orange;">Pendiente de Firma</td>
+            <td data-label="Acción"><a href="#" onclick="alert('Descargando Carta de Aceptación...'); return false;">Descargar</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <script>
+    // Protección de ruta
+    const usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+    if (!usuarioActivo) {
+      window.location.href = 'login.html';
+    }
+
+    document.getElementById('generarDocumentoBtn').addEventListener('click', function() {
+      const tipo = document.getElementById('tipoDocumento').value;
+      const mensaje = document.getElementById('mensajeGeneracion');
+      if (tipo) {
+        mensaje.textContent = `Documento de ${tipo} generado (simulado). En un sistema real, se crearía un PDF dinámicamente.`;
+        mensaje.style.color = 'green';
+      } else {
+        mensaje.textContent = 'Por favor, selecciona un tipo de documento.';
+        mensaje.style.color = 'red';
+      }
+    });
+
+    // Funcionalidad de cerrar sesión
+    document.getElementById('cerrarSesion').addEventListener('click', function(event) {
+      event.preventDefault();
+      localStorage.removeItem('usuarioActivo');
+      localStorage.removeItem('horasServicioSocial');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

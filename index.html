@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPN - SSP Inicio</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.ipn.mx/assets/files/main/img/template/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="login.html">Iniciar Sesión</a>
+    <a href="registro.html">Registro</a>
+    <a href="dashboard.html">Panel</a>
+    <a href="programas.html">Programas</a>
+    <a href="postulacion.html">Postulación</a>
+    <a href="subir-evidencias.html">Evidencias</a>
+    <a href="seguimiento.html">Seguimiento</a>
+    <a href="evaluacion.html">Evaluación</a>
+    <a href="gestion-documental.html">Documentos</a>
+    <a href="panel-asesor.html">Asesor</a>
+    <a href="panel-admin.html">Admin</a>
+    <a href="criticas.html">Críticas</a>
+    <a href="#" id="cerrarSesion" style="display:none;">Cerrar Sesión</a>
+  </nav>
+
+  <header>
+    <h1>Sistema de Servicio Social IPN</h1>
+  </header>
+  <section class="container container-sm">
+    <h2 id="mensajeBienvenida">Bienvenido</h2>
+    <p>Gestiona tu servicio social de forma rápida y eficiente.</p>
+    <div class="link" id="linksLoginRegistro">
+      <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+      <p>¿Eres nuevo? <a href="registro.html">Regístrate</a></p>
+    </div>
+    <div id="mensajeSesionIniciada" style="text-align: center; display:none;">
+      <p>Ya tienes una sesión iniciada. Ve a tu <a href="dashboard.html">Panel</a>.</p>
+    </div>
+  </section>
+
+  <script>
+    const usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+    const cerrarSesionBtn = document.getElementById('cerrarSesion');
+    const linksLoginRegistro = document.getElementById('linksLoginRegistro');
+    const mensajeSesionIniciada = document.getElementById('mensajeSesionIniciada');
+    const mensajeBienvenida = document.getElementById('mensajeBienvenida');
+
+    if (usuarioActivo) {
+      cerrarSesionBtn.style.display = 'inline';
+      linksLoginRegistro.style.display = 'none';
+      mensajeSesionIniciada.style.display = 'block';
+      mensajeBienvenida.textContent = `¡Hola, ${usuarioActivo.nombre}!`;
+    } else {
+      cerrarSesionBtn.style.display = 'none';
+    }
+
+    cerrarSesionBtn.addEventListener('click', function(event) {
+      event.preventDefault();
+      localStorage.removeItem('usuarioActivo');
+      localStorage.removeItem('horasServicioSocial');
+      window.location.reload();
+    });
+  </script>
+</body>
+</html>

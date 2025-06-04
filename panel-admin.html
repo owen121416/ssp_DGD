@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPN - SSP Panel Administrativo</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://www.ipn.mx/assets/files/main/img/template/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="login.html">Iniciar Sesión</a>
+    <a href="registro.html">Registro</a>
+    <a href="dashboard.html">Panel</a>
+    <a href="programas.html">Programas</a>
+    <a href="postulacion.html">Postulación</a>
+    <a href="subir-evidencias.html">Evidencias</a>
+    <a href="seguimiento.html">Seguimiento</a>
+    <a href="evaluacion.html">Evaluación</a>
+    <a href="gestion-documental.html">Documentos</a>
+    <a href="panel-asesor.html">Asesor</a>
+    <a href="panel-admin.html">Admin</a>
+    <a href="criticas.html">Críticas</a>
+    <a href="#" id="cerrarSesion">Cerrar Sesión</a>
+  </nav>
+
+  <header>
+    <h1>Panel de Control Administrativo</h1>
+  </header>
+
+  <section class="container">
+    <h2>Estadísticas Generales (Simulado)</h2>
+    <div class="form-columns">
+        <div class="card">
+            <h3>Alumnos Registrados</h3>
+            <p style="font-size: 2.5rem; color: var(--guinda);">500</p>
+        </div>
+        <div class="card">
+            <h3>Programas Activos</h3>
+            <p style="font-size: 2.5rem; color: var(--guinda);">75</p>
+        </div>
+        <div class="card">
+            <h3>Alumnos en Proceso</h3>
+            <p style="font-size: 2.5rem; color: var(--guinda);">320</p>
+        </div>
+        <div class="card">
+            <h3>Servicios Concluidos</h3>
+            <p style="font-size: 2.5rem; color: var(--guinda);">180</p>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 2rem;">
+      <h3>Reportes y Exportación (Simulado)</h3>
+      <p>Genera reportes y exporta la base de datos de alumnos.</p>
+      <div class="form-columns">
+          <button onclick="alert('Generando reporte de alumnos por carrera...');">Reporte por Carrera</button>
+          <button onclick="alert('Generando reporte de alumnos por ciclo escolar...');">Reporte por Ciclo</button>
+          <button onclick="alert('Exportando base de datos a Excel...');">Exportar a Excel</button>
+          <button onclick="alert('Exportando base de datos a PDF...');">Exportar a PDF</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 2rem;">
+        <h3>Detección de Irregularidades (Simulado)</h3>
+        <p>Aquí se mostrarían alertas sobre actividades inusuales o retrasos.</p>
+        <ul>
+            <li><span style="color: red; font-weight: bold;">Alerta:</span> Alumno 'Pedro Sánchez' sin actividades registradas en 30 días.</li>
+            <li><span style="color: orange; font-weight: bold;">Advertencia:</span> Programa 'Apoyo Técnico CENAC' con baja postulación.</li>
+        </ul>
+    </div>
+  </section>
+
+  <script>
+    // Protección de ruta (simulada para administrador)
+    const usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+    // En un sistema real, verificarías el rol del usuario (por ejemplo, usuarioActivo.rol === 'admin')
+    if (!usuarioActivo) {
+      window.location.href = 'login.html';
+    }
+
+    // Funcionalidad de cerrar sesión
+    document.getElementById('cerrarSesion').addEventListener('click', function(event) {
+      event.preventDefault();
+      localStorage.removeItem('usuarioActivo');
+      localStorage.removeItem('horasServicioSocial');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
