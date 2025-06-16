@@ -1,8 +1,34 @@
 <nav>
-  <a href="index.html">Inicio</a>
-  <a href="login.html">Iniciar Sesión</a>
-  <a href="registro.html">Registro</a>
-  <a href="dashboard.html">Panel</a>
-  <a href="subir-evidencias.html">Evidencias</a>
-  <a href="seguimiento.html">Seguimiento</a>
+  <button class="menu-toggle" id="menuToggle">Menú &#9776;</button>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Inicio</a>
+    <a href="login.html">Iniciar Sesión</a>
+    <a href="registro.html">Registro</a>
+    <a href="dashboard.html">Panel</a>
+    
+    <div class="dropdown">
+      <a href="programas.html" class="dropbtn">Programas <span class="arrow">&#9662;</span></a>
+      <div class="dropdown-content">
+        <a href="programas.html">Explorar Programas</a>
+        <a href="postulacion.html">Realizar Postulación</a>
+      </div>
+    </div>
+
+    <a href="subir-evidencias.html">Evidencias</a>
+    <a href="seguimiento.html">Seguimiento</a>
+    <a href="evaluacion.html">Evaluación</a>
+    
+    <div class="dropdown">
+      <a href="gestion-documental.html" class="dropbtn">Documentos <span class="arrow">&#9662;</span></a>
+      <div class="dropdown-content">
+        <a href="gestion-documental.html">Mis Documentos</a>
+        <a href="#">Generar Nuevo</a> 
+      </div>
+    </div>
+
+    <a href="panel-asesor.html">Asesor</a>
+    <a href="panel-admin.html">Admin</a>
+    <a href="criticas.html">Críticas</a>
+    <a href="#" id="cerrarSesion">Cerrar Sesión</a>
+  </div>
 </nav>

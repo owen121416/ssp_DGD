@@ -58,6 +58,20 @@ nav {
   flex-wrap: wrap; /* Permite que los elementos se envuelvan */
   justify-content: center;
   gap: 15px; /* Espacio entre los enlaces de navegación */
+  position: relative; /* Necesario para posicionar el menú toggle */
+}
+
+/* Por defecto, en escritorio, el botón de menú móvil está oculto */
+.menu-toggle {
+    display: none;
+}
+
+.nav-links {
+    display: flex; /* Muestra los enlaces horizontalmente */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    width: 100%; /* Ocupa todo el ancho disponible */
 }
 
 nav a {
@@ -71,22 +85,34 @@ nav a {
 }
 
 nav a:hover {
-  background-color: #a72d30; /* Tono más oscuro al pasar el ratón */
+  background-color: #a72d30; /* Tono más oscuro al pasar el ratón, sigue siendo guinda oscuro */
 }
 
 /* Header */
 header {
   background-color: var(--guinda);
   color: var(--blanco);
-  padding: 40px 20px;
+  padding: 30px 20px; /* Ajuste de padding si es necesario */
   text-align: center;
   margin-bottom: 20px;
+  display: flex; /* Para centrar el logo y el título */
+  flex-direction: column; /* Apilar el logo y el título */
+  align-items: center; /* Centrar horizontalmente */
+  justify-content: center;
 }
 
 header h1 {
   color: var(--blanco);
   margin: 0;
   font-size: 2.5rem; /* Tamaño de fuente responsivo */
+}
+
+/* Estilos para el logo en el header */
+.header-logo {
+  max-width: 150px; /* Tamaño máximo del logo en escritorio */
+  height: auto;
+  margin: 0 auto 15px auto; /* Centrar y añadir margen inferior */
+  display: block; /* Asegurar que se comporte como un bloque para centrar con margin: auto */
 }
 
 /* Formularios y elementos de interacción */
@@ -111,8 +137,8 @@ input[type="email"],
 input[type="password"],
 input[type="text"],
 input[type="number"],
-input[type="date"], /* Añadido para el input de fecha */
-input[type="file"], /* Añadido para el input de archivo */
+input[type="date"],
+input[type="file"],
 select,
 textarea {
   width: calc(100% - 22px); /* Ajuste para padding y borde */
@@ -125,7 +151,7 @@ textarea {
 
 /* Estilos específicos para input type="file" */
 input[type="file"] {
-    padding: 8px 10px; /* Un poco menos de padding para que se vea mejor */
+    padding: 8px 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
@@ -217,7 +243,6 @@ table th {
 table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
-/* Fin de estilos de tabla para desktop */
 
 
 /* Barra de progreso (Dashboard) */
@@ -227,87 +252,243 @@ table tr:nth-child(even) {
   border-radius: 5px;
   margin-top: 10px;
   height: 25px;
-  overflow: hidden; /* Asegura que el relleno no se salga */
+  overflow: hidden;
 }
 
 .progress-bar-fill {
-  height: 100%;
   background-color: var(--guinda);
+  height: 100%;
   color: var(--blanco);
   text-align: center;
   line-height: 25px;
   border-radius: 5px;
   transition: width 0.5s ease-in-out, background-color 0.3s ease;
-  font-weight: 600; /* Asegura que el texto sea legible */
-  white-space: nowrap; /* Evita que el texto del porcentaje se rompa */
-  overflow: hidden; /* Oculta si el texto es demasiado largo para el espacio */
-  text-overflow: ellipsis; /* Añade puntos suspensivos si el texto se corta */
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 
 /* Columnas para el panel de admin/asesor */
 .form-columns {
   display: flex;
-  flex-wrap: wrap; /* Permite que los elementos se envuelvan */
-  gap: 20px; /* Espacio entre las columnas */
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
 }
 
 .form-columns .card,
 .form-columns button {
-  flex: 1; /* Permite que los elementos se expandan */
-  min-width: 280px; /* Ancho mínimo antes de envolver */
-  max-width: 48%; /* Máximo dos columnas por fila en pantallas grandes */
+  flex: 1;
+  min-width: 280px;
+  max-width: 48%;
   box-sizing: border-box;
 }
 
-/* MEDIA QUERIES para responsividad */
+/* --- ESTILOS PARA MENÚS DESPLEGABLES INDIVIDUALES DENTRO DE NAV --- */
+
+/* Contenedor del desplegable */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Estilo del botón/enlace que activa el desplegable */
+.dropbtn {
+  color: var(--blanco);
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+  white-space: nowrap;
+  display: block;
+  cursor: pointer;
+}
+
+.dropbtn:hover {
+    background-color: #a72d30;
+}
+
+/* Estilo de la flecha del desplegable */
+.dropbtn .arrow {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+/* Contenido del menú desplegable (oculto por defecto) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--guinda);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100;
+  border-radius: 5px;
+  top: 100%;
+  left: 0;
+}
+
+/* Enlaces dentro del desplegable */
+.dropdown-content a {
+  color: var(--blanco);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
+
+/* Cambiar color de fondo de los enlaces del desplegable al pasar el ratón */
+.dropdown-content a:hover {
+  background-color: #a72d30;
+}
+
+/* Mostrar el menú desplegable al pasar el ratón sobre el contenedor */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Rotar la flecha cuando el menú está abierto */
+.dropdown:hover .dropbtn .arrow {
+  transform: rotate(180deg);
+}
+
+
+/* --- MEDIA QUERIES PARA RESPONSIVIDAD (MENÚ GENERAL DESPLEGABLE EN MÓVIL) --- */
 
 /* Teléfonos pequeños y medianos (hasta 767px) */
 @media (max-width: 767px) {
   body {
-    font-size: 0.875rem; /* Reduce el tamaño de fuente base a 14px */
+    font-size: 0.875rem;
   }
 
-  /* Ajustes de navegación para móvil */
+  /* Navegación General en Móvil */
   nav {
-    flex-direction: column; /* Apila los enlaces de navegación */
-    gap: 0; /* Elimina el espacio entre enlaces apilados */
-    padding: 0; /* Sin padding en el contenedor nav, los enlaces tienen su propio padding */
+    flex-direction: column; /* Apila elementos */
+    align-items: flex-start; /* Alinea el botón de menú a la izquierda */
+    padding: 10px 15px; /* Padding para el nav */
   }
 
-  nav a {
-    width: 100%; /* Ancho completo para cada enlace */
-    padding: 12px 0; /* Más padding vertical para facilitar el toque */
-    text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador suave */
-    font-size: 0.95rem; /* Tamaño de fuente ligeramente más grande para los enlaces */
+  .menu-toggle {
+    display: block; /* Muestra el botón de menú */
+    background-color: transparent; /* Fondo transparente */
+    color: var(--blanco); /* Color del texto del botón */
+    border: none;
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 100%; /* Ocupa todo el ancho */
+    text-align: left; /* Alinea el texto a la izquierda */
+    font-weight: 600;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
   }
 
+  .menu-toggle:hover {
+      background-color: #a72d30;
+  }
+
+  .nav-links {
+    display: none; /* Oculta los enlaces por defecto en móvil */
+    flex-direction: column; /* Apila los enlaces y dropdowns */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    gap: 0; /* Elimina el espacio entre elementos apilados */
+    padding-top: 10px; /* Separación del botón de menú */
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Separador visual */
+  }
+
+  .nav-links.active { /* Clase para mostrar el menú con JS */
+      display: flex;
+  }
+
+  nav a { /* Estilos para los enlaces dentro de nav-links */
+    width: 100%;
+    padding: 12px 15px; /* Padding más generoso para clic táctil */
+    text-align: left; /* Alinea a la izquierda para una lista */
+    font-size: 1rem; /* Tamaño de fuente legible */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+  }
   nav a:last-child {
-    border-bottom: none; /* Sin borde en el último enlace */
+      border-bottom: none;
   }
 
+
+  /* Ajustes para Dropdowns Individuales dentro del Menú General en Móvil */
+  .dropdown {
+    width: 100%;
+    display: block; /* Asegura que el dropdown sea un bloque */
+  }
+
+  .dropdown .dropbtn { /* Estilo del botón desplegable dentro del menú general */
+    width: 100%;
+    text-align: left; /* Alinea el texto a la izquierda */
+    padding: 12px 15px;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+  }
+
+  .dropdown .dropbtn .arrow {
+      float: right; /* Mueve la flecha a la derecha */
+      margin-right: 0;
+  }
+
+
+  .dropdown-content { /* Estilo del contenido del sub-desplegable */
+    position: static; /* No flotar, fluir con el documento */
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    background-color: #7a1d24; /* Un tono ligeramente más oscuro para el submenú */
+    padding-left: 20px; /* Indentación para sub-elementos */
+    box-sizing: border-box;
+  }
+
+  .dropdown-content a {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Separador más sutil */
+  }
+  .dropdown-content a:last-child {
+    border-bottom: none;
+  }
+
+  /* Header */
   header {
-    padding: 30px 15px; /* Menos padding en el header */
-    margin-bottom: 15px;
+    padding: 20px 15px; /* Ajustar padding del header en móviles */
   }
 
   header h1 {
-    font-size: 2rem; /* Tamaño de fuente más pequeño para encabezados */
+    font-size: 2rem;
+  }
+
+  .header-logo {
+    max-width: 100px; /* Reducir el tamaño del logo en móviles */
+    margin-bottom: 10px; /* Reducir margen en móviles */
   }
 
   .container {
     margin: 15px auto;
     padding: 15px;
-    width: 95%; /* Mayor ancho en pantallas pequeñas */
+    width: 95%;
   }
 
   h1, h2, h3 {
-    font-size: 1.3rem; /* Reduce el tamaño de los títulos */
+    font-size: 1.3rem;
     margin-bottom: 15px;
   }
 
-  /* Ajustes para formularios */
+  /* Formularios */
   input[type="email"],
   input[type="password"],
   input[type="text"],
@@ -318,32 +499,32 @@ table tr:nth-child(even) {
   textarea {
     font-size: 0.9rem;
     padding: 10px;
-    width: calc(100% - 20px); /* Ajuste para mantener el padding */
+    width: calc(100% - 20px);
   }
-    /* Asegura que el input file sea un bloque y se vea bien */
-    input[type="file"] {
-        display: block;
-        width: 100%;
-    }
+
+  input[type="file"] {
+      display: block;
+      width: 100%;
+  }
 
 
   button[type="submit"],
   button {
     font-size: 1rem;
     padding: 12px 15px;
-    width: 90%; /* Ancho casi completo para botones */
-    margin: 0 auto; /* Centrar el botón */
+    width: 90%;
+    margin: 0 auto;
   }
 
-  /* Ajustes para tablas en móvil (Transformación "card-like") */
+  /* Tablas en Móvil */
   table {
-    display: block; /* Necesario para overflow-x */
+    display: block;
     width: 100%;
-    overflow-x: auto; /* Permite scroll horizontal si el contenido es demasiado ancho */
+    overflow-x: auto;
   }
 
   table thead {
-    display: none; /* Oculta el encabezado original en móvil */
+    display: none;
   }
 
   table tbody {
@@ -353,125 +534,124 @@ table tr:nth-child(even) {
 
   table tr {
     border: 1px solid #ccc;
-    margin-bottom: 15px; /* Más espacio entre filas/tarjetas */
+    margin-bottom: 15px;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    display: block; /* Cada fila se convierte en un bloque */
-    padding: 10px; /* Padding dentro de cada "tarjeta" de fila */
+    display: block;
+    padding: 10px;
   }
 
   table td {
-    border: none; /* Elimina los bordes de celda */
-    border-bottom: 1px solid #eee; /* Añade un separador sutil */
+    border: none;
+    border-bottom: 1px solid #eee;
     position: relative;
-    padding-left: 50%; /* Espacio para la etiqueta del pseudo-elemento */
+    padding-left: 50%;
     text-align: right;
-    display: block; /* Cada celda es un bloque dentro de la fila */
+    display: block;
     padding-top: 8px;
     padding-bottom: 8px;
-    font-size: 0.9rem; /* Ajuste del tamaño de fuente en las celdas */
+    font-size: 0.9rem;
   }
 
   table td:last-child {
-    border-bottom: none; /* No hay borde en la última celda */
+    border-bottom: none;
   }
 
   table td:before {
     position: absolute;
     top: 50%;
-    left: 10px; /* Alinea la etiqueta a la izquierda */
+    left: 10px;
     width: 40%;
     padding-right: 10px;
-    white-space: nowrap; /* Evita que la etiqueta se rompa */
+    white-space: nowrap;
     text-align: left;
     font-weight: bold;
-    content: attr(data-label); /* Usa el atributo data-label */
-    transform: translateY(-50%); /* Centra verticalmente la etiqueta */
+    content: attr(data-label);
+    transform: translateY(-50%);
     box-sizing: border-box;
-    color: #555; /* Color para las etiquetas */
+    color: #555;
   }
-    /* Estilos específicos para la columna de acción en las tablas */
-    td[data-label="Acción"] {
-        text-align: center; /* Centra los enlaces de acción */
-        padding-left: 10px; /* Ajusta el padding para que no interfiera con data-label */
-    }
-    td[data-label="Acción"]:before {
-        content: none; /* No mostrar data-label para la columna de acción */
-    }
+
+  td[data-label="Acción"] {
+      text-align: center;
+      padding-left: 10px;
+  }
+  td[data-label="Acción"]:before {
+      content: none;
+  }
 
 
-  /* Ajustes específicos para las columnas en el panel de admin/asesor */
+  /* Columnas en Panel Admin/Asesor */
   .form-columns {
-    flex-direction: column; /* Apila las tarjetas/botones en móvil */
+    flex-direction: column;
     gap: 15px;
   }
   .form-columns .card,
   .form-columns button {
-    min-width: unset; /* Elimina el min-width */
-    max-width: 100%; /* Ocupa todo el ancho disponible */
+    min-width: unset;
+    max-width: 100%;
     width: 100%;
   }
 
   /* Estilos específicos para essss.html (invitación) */
-  /* Asegura que estos estilos no afecten a las otras páginas */
-  body:not([class]):not(#ipn-app) .tarjeta { /* Usa un selector más específico */
-      padding: 20px; /* Menos padding en móvil */
-      width: 95%; /* Ocupa más ancho */
+  body:not([class]):not(#ipn-app) .tarjeta {
+      padding: 20px;
+      width: 95%;
       margin-bottom: 25px;
   }
 
   body:not([class]):not(#ipn-app) .tarjeta:first-child {
-      padding-top: 100px; /* Ajuste para la decoración superior en móvil */
+      padding-top: 100px;
   }
 
   body:not([class]):not(#ipn-app) .decoracion-arriba {
-      height: 80px; /* Menor altura de la decoración */
-      background-size: 100% auto; /* Ajusta la imagen */
+      height: 80px;
+      background-size: 100% auto;
   }
 
   body:not([class]):not(#ipn-app) .decorativo {
-      width: 70px; /* Más pequeño */
+      width: 70px;
       top: 10px;
       left: 10px;
   }
 
   body:not([class]):not(#ipn-app) .titulo-quince {
-      font-size: 36px; /* Más pequeño */
+      font-size: 36px;
   }
 
   body:not([class]):not(#ipn-app) .quince {
-      font-size: 28px; /* Más pequeño */
+      font-size: 28px;
       margin: 5px 0 10px 0;
   }
 
-  body:not([class]):not(#ipn-app) .texto {
-      font-size: 14px; /* Más pequeño */
+  body:not([class]):not([class^="container"]) .texto { /* Selector ajustado para essss.html */
+      font-size: 14px;
       margin: 15px 0;
   }
 
   body:not([class]):not(#ipn-app) .fecha {
-      font-size: 16px; /* Más pequeño */
+      font-size: 16px;
       margin: 15px 0;
       padding: 8px 0;
   }
 
   body:not([class]):not(#ipn-app) .datos {
-      font-size: 13px; /* Más pequeño */
+      font-size: 13px;
   }
 
   body:not([class]):not(#ipn-app) .icono {
-      font-size: 24px; /* Más pequeño */
+      font-size: 24px;
       margin-bottom: 5px;
   }
 
   body:not([class]):not(#ipn-app) .subseccion {
-      padding-left: 12px; /* Menos padding */
+      padding-left: 12px;
       margin: 15px 0;
   }
 
   body:not([class]):not(#ipn-app) .confirmar-asistencia {
-      padding: 10px 20px; /* Menos padding */
-      font-size: 15px; /* Más pequeño */
+      padding: 10px 20px;
+      font-size: 15px;
       margin-top: 20px;
   }
 }
@@ -504,15 +684,15 @@ table tr:nth-child(even) {
 
   .form-columns .card,
   .form-columns button {
-    min-width: 300px; /* Ajuste para tablets */
+    min-width: 300px;
     max-width: 45%;
   }
 
   /* Asegura que las tablas tengan un ancho razonable */
   table {
       width: 100%;
-      display: table; /* Vuelve al comportamiento normal de tabla */
-      overflow-x: visible; /* Asegura que no haya scroll horizontal si no es necesario */
+      display: table;
+      overflow-x: visible;
   }
 
   table thead {
@@ -523,26 +703,26 @@ table tr:nth-child(even) {
   }
   table tr {
       display: table-row;
-      border: none; /* Elimina el borde de fila que se agregó para móvil */
-      box-shadow: none; /* Elimina la sombra de fila que se agregó para móvil */
+      border: none;
+      box-shadow: none;
       margin-bottom: 0;
   }
   table td {
       display: table-cell;
-      padding-left: 12px; /* Restaura el padding normal */
-      text-align: left; /* Restaura la alineación */
-      border-bottom: 1px solid #ddd; /* Vuelve a los bordes de celda */
-      font-size: 1rem; /* Restaura el tamaño de fuente en las celdas */
+      padding-left: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      font-size: 1rem;
   }
   table td:before {
-      content: none; /* Oculta las etiquetas data-label en tablet y desktop */
+      content: none;
   }
 }
 
 /* Monitores grandes (más de 1201px) */
 @media (min-width: 1201px) {
   .container {
-    padding: 30px; /* Mayor padding en pantallas grandes */
+    padding: 30px;
   }
 
   header h1 {

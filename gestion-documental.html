@@ -10,23 +10,42 @@
 </head>
 <body>
   <nav>
-    <a href="index.html">Inicio</a>
-    <a href="login.html">Iniciar Sesión</a>
-    <a href="registro.html">Registro</a>
-    <a href="dashboard.html">Panel</a>
-    <a href="programas.html">Programas</a>
-    <a href="postulacion.html">Postulación</a>
-    <a href="subir-evidencias.html">Evidencias</a>
-    <a href="seguimiento.html">Seguimiento</a>
-    <a href="evaluacion.html">Evaluación</a>
-    <a href="gestion-documental.html">Documentos</a>
-    <a href="panel-asesor.html">Asesor</a>
-    <a href="panel-admin.html">Admin</a>
-    <a href="criticas.html">Críticas</a>
-    <a href="#" id="cerrarSesion">Cerrar Sesión</a>
+    <button class="menu-toggle" id="menuToggle">Menú &#9776;</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="login.html">Iniciar Sesión</a>
+      <a href="registro.html">Registro</a>
+      <a href="dashboard.html">Panel</a>
+      
+      <div class="dropdown">
+        <a href="programas.html" class="dropbtn">Programas <span class="arrow">&#9662;</span></a>
+        <div class="dropdown-content">
+          <a href="programas.html">Explorar Programas</a>
+          <a href="postulacion.html">Realizar Postulación</a>
+        </div>
+      </div>
+
+      <a href="subir-evidencias.html">Evidencias</a>
+      <a href="seguimiento.html">Seguimiento</a>
+      <a href="evaluacion.html">Evaluación</a>
+      
+      <div class="dropdown">
+        <a href="gestion-documental.html" class="dropbtn">Documentos <span class="arrow">&#9662;</span></a>
+        <div class="dropdown-content">
+          <a href="gestion-documental.html">Mis Documentos</a>
+          <a href="#">Generar Nuevo</a> 
+        </div>
+      </div>
+
+      <a href="panel-asesor.html">Asesor</a>
+      <a href="panel-admin.html">Admin</a>
+      <a href="criticas.html">Críticas</a>
+      <a href="#" id="cerrarSesion">Cerrar Sesión</a>
+    </div>
   </nav>
 
   <header>
+    <img src="https://i.ibb.co/gLJmfCCs/logoooooooo.png" alt="Logo Servicio Social Politécnico" class="header-logo">
     <h1>Gestión Documental</h1>
   </header>
 
@@ -104,6 +123,53 @@
       localStorage.removeItem('usuarioActivo');
       localStorage.removeItem('horasServicioSocial');
       window.location.href = 'index.html';
+    });
+
+    // JavaScript para el menú de hamburguesa general y desplegables individuales
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+
+            // Opcional: Cerrar el menú si se hace clic en un enlace (para móvil)
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 767) {
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+        }
+
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        dropdowns.forEach(dropdown => {
+            const dropbtn = dropdown.querySelector('.dropbtn');
+            const dropdownContent = dropdown.querySelector('.dropdown-content');
+
+            // Toggle dropdown on click for mobile/touch devices
+            dropbtn.addEventListener('click', function(event) {
+                if (window.innerWidth <= 767) {
+                    event.preventDefault();
+                    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+                    dropbtn.querySelector('.arrow').style.transform = dropdownContent.style.display === 'block' ? 'rotate(180deg)' : 'rotate(0deg)';
+                }
+            });
+
+            // Close dropdowns when clicking outside (for mobile)
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 767 && !dropdown.contains(event.target) && event.target !== menuToggle) {
+                    dropdownContent.style.display = 'none';
+                    if (dropbtn.querySelector('.arrow')) {
+                        dropbtn.querySelector('.arrow').style.transform = 'rotate(0deg)';
+                    }
+                }
+            });
+        });
     });
   </script>
 </body>
